@@ -97,3 +97,6 @@ UIButton = L.Control.extend({
 var newRouteButton = new UIButton();
 map.addControl(newRouteButton);
 //newRouteButton.addTo(map);
+
+
+L.control.scale().addTo(map);
