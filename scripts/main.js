@@ -61,7 +61,7 @@ map.on('click', onMapClick);
 
 
 // Controls.
-UIButton = L.Control.extend({
+NewRouteButton = L.Control.extend({
   options: {
     position: 'topright',
   },
@@ -91,7 +91,7 @@ UIButton = L.Control.extend({
     var controlUI = L.DomUtil.create('a', 'leaflet-control-command-interior', controlDiv);
     controlUI.title = 'New Route';
     controlUI.innerHTML = "<span>New Route</span>";
-    controlUI.href = 'New Route';
+    controlUI.href = '#';
     controlUI.style.width = '100px';
     controlUI.style.height = '30px';
 
@@ -102,9 +102,55 @@ UIButton = L.Control.extend({
   }
 });
 
-var newRouteButton = new UIButton();
+
+SaveRouteButton = L.Control.extend({
+  options: {
+    position: 'topright',
+  },
+  onAdd: function(map) {
+    // var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+    // var button = L.DomUtil.create('a', 'leaflet-control-button', container);
+
+    // L.DomEvent.disableClickPropagation(button);
+    // L.DomEvent.on(button, 'click', function(){
+    //   var marker = L.marker([51.6, -0.1]).addTo(map);
+    // });
+
+    // container.title = "NewRoute";
+    // return container;
+
+    var controlDiv = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+    controlDiv.style.width = '100px';
+    controlDiv.style.height = '30px';
+
+    L.DomEvent
+      .addListener(controlDiv, 'click', L.DomEvent.stopPropagation)
+      .addListener(controlDiv, 'click', L.DomEvent.preventDefault)
+      .addListener(controlDiv, 'click', function() {
+        map.setView([51.50008, -0.09], 16);
+      });
+    
+    var controlUI = L.DomUtil.create('a', 'leaflet-control-command-interior', controlDiv);
+    controlUI.title = 'Save Route';
+    controlUI.innerHTML = "<span>Save Route</span>";
+    controlUI.href = '#';
+    controlUI.style.width = '100px';
+    controlUI.style.height = '30px';
+
+    return controlDiv;
+  },
+  onRemove: function(map){
+    // Nothing to do.
+  }
+});
+
+var newRouteButton = new NewRouteButton();
 map.addControl(newRouteButton);
 //newRouteButton.addTo(map);
+
+var saveRouteButton = new SaveRouteButton();
+map.addControl(saveRouteButton);
+//saveRouteButton.addTo(map);
 
 
 // Scale.
