@@ -76,7 +76,10 @@ UIButton = L.Control.extend({
     // container.title = "NewRoute";
     // return container;
 
-    var controlDiv = L.DomUtil.create('div', 'leaflet-draw-toolbar leaflet-bar');
+    var controlDiv = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+    controlDiv.style.width = '100px';
+    controlDiv.style.height = '30px';
+
     L.DomEvent
       .addListener(controlDiv, 'click', L.DomEvent.stopPropagation)
       .addListener(controlDiv, 'click', L.DomEvent.preventDefault)
@@ -87,6 +90,9 @@ UIButton = L.Control.extend({
     var controlUI = L.DomUtil.create('a', 'leaflet-control-command-interior', controlDiv);
     controlUI.title = 'New Route';
     controlUI.href = '#';
+    controlUI.style.width = '100px';
+    controlUI.style.height = '30px';
+
     return controlDiv;
   },
   onRemove: function(map){
@@ -97,6 +103,5 @@ UIButton = L.Control.extend({
 var newRouteButton = new UIButton();
 map.addControl(newRouteButton);
 //newRouteButton.addTo(map);
-
 
 L.control.scale().addTo(map);
