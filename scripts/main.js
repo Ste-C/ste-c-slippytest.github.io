@@ -59,7 +59,8 @@ function onMapClick(e) {
 
 map.on('click', onMapClick);
 
-// Control.
+
+// Controls.
 UIButton = L.Control.extend({
   options: {
     position: 'topright',
@@ -89,7 +90,8 @@ UIButton = L.Control.extend({
     
     var controlUI = L.DomUtil.create('a', 'leaflet-control-command-interior', controlDiv);
     controlUI.title = 'New Route';
-    controlUI.href = '#';
+    controlUI.innerHTML = "<span>New Route</span>";
+    controlUI.href = 'New Route';
     controlUI.style.width = '100px';
     controlUI.style.height = '30px';
 
@@ -104,4 +106,6 @@ var newRouteButton = new UIButton();
 map.addControl(newRouteButton);
 //newRouteButton.addTo(map);
 
+
+// Scale.
 L.control.scale().addTo(map);
