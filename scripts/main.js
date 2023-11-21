@@ -8,7 +8,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="http:www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-// create a red polyline from an array of LatLng points
+// Create a polyline from an array of LatLng points.
 var latlngs = [
   [51.50008, -0.09],
   [51.49998, -0.0905],
@@ -21,7 +21,7 @@ var latlngs = [
   [51.499745, -0.090199],
 ];
 
-var polyline = L.polyline(latlngs, {color: 'blue'}).addTo(map);
+var polyline = L.polyline(latlngs, {color: 'blue', fillOpacity:0.2}).addTo(map);
 
-// zoom the map to the polyline
+// Zoom the map to the polyline.
 map.fitBounds(polyline.getBounds());
