@@ -59,10 +59,41 @@ function onMapClick(e) {
 
 map.on('click', onMapClick);
 
+// Control.
+UIButton = L.Control.extend({
+  options: {
+    position: 'topright',
+  },
+  onAdd: function(map) {
+    // var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+    // var button = L.DomUtil.create('a', 'leaflet-control-button', container);
 
-// Buttons.
-const button = document.getElementById("AddRoute");
+    // L.DomEvent.disableClickPropagation(button);
+    // L.DomEvent.on(button, 'click', function(){
+    //   var marker = L.marker([51.6, -0.1]).addTo(map);
+    // });
 
-button.onclick = () => {
-  alert("BOOP");
-};
+    // container.title = "NewRoute";
+    // return container;
+
+    var controlDiv = L.DomUtil.create('div', 'leaflet-draw-toolbar leaflet-bar');
+    L.DomEvent
+      .addListener(controlDiv, 'click', L.DomEvent.stopPropagation)
+      .addListener(controlDiv, 'click', L.DomEvent.preventDefault)
+      .addListener(controlDiv, 'click', function() {
+        map.setView([51.50008, -0.09], 16);
+      });
+    
+    var controlUI = L.DomUtil.create('a', 'leaflet-control-command-interior', controlDiv);
+    controlUI.title = 'New Route';
+    controlUI.href = '#';
+    return controlDiv;
+  },
+  onRemove: function(map){
+    // Nothing to do.
+  }
+});
+
+var newRouteButton = new UIButton();
+map.addControl(newRouteButton);
+//newRouteButton.addTo(map);
